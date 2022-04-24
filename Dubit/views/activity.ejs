@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Cedarville+Cursive&family=Comic+Neue:wght@300&family=Grape+Nuts&family=Overlock:ital,wght@0,400;1,900&family=Secular+One&display=swap" rel="stylesheet">
+        
+        <title>Your activity</title>
+        <style>
+          body{
+               background-image: url('../../images/lib.jpg');
+               background-size:cover;
+               background-color: black;
+               color:white;
+               font-family: 'Comic Neue', cursive ;
+               
+           }
+           li{
+             list-style: none;
+            margin-top: 10px;
+          
+           }
+           span{
+            display: inline-block;
+               padding: 5px;
+               border-radius: 2px;
+               text-align: center;
+               background-color: white;
+               color: black;
+               margin-right: 10px;
+               font-weight: bolder;
+           }
+           h1{
+            text-align: center;
+                font-family: 'Comic Neue', cursive;
+                color: white;
+               
+               font-weight: bolder;
+           }
+        </style>
+    </head>
+    <body>
+      <h1>Your activity</h1>
+      <h3><%= sen %></h3>
+      <h2>Questions asked :-</h2>
+      <ul>
+      <% for(let i=(questions.length-1);i>=0;i--){ %>
+        <li><span><%= questions.length-i %></span><%= questions[i] %></li>
+
+     <% } %>
+      </ul>
+      <h2>Answers Given :-</h2>
+      <ul>
+        <% for(let i=(answers.length-1);i>=0;i--){ %>
+          <li><span><%= answers.length-i %></span><%= answers[i] %></li>
+  
+       <% } %>
+        </ul>
+
+    </body>
+</html>

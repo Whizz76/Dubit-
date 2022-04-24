@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+       
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Cedarville+Cursive&family=Comic+Neue:wght@300&family=Grape+Nuts&family=Overlock:ital,wght@0,400;1,900&family=Secular+One&display=swap" rel="stylesheet">
+        
+        <title>
+            Doubt page
+        </title>
+       <style>
+           .ch{
+               display: none;
+           }
+           body{
+               
+               background-image: url('../../images/lib.jpg');
+               
+               background-size:100vw 80vw;
+               background-color: black;
+              
+               
+           }
+           li{
+               list-style: none;
+               display: block;
+              
+               margin-top: 19px;
+               font-size: larger;
+               color: white;
+               font-family: 'Comic Neue', cursive;
+               font-weight: 600;
+               cursor: pointer;
+               text-align: left!important;
+               margin-left: 20px;
+               line-height:1.6;
+           }
+           a{
+               text-decoration: none;
+               font-family: 'Comic Neue', cursive;
+               color: white;
+               font-weight: 600;
+               cursor: pointer;
+           }
+           a:hover{
+               text-decoration: underline;
+           }
+           h1,h3{
+            text-align: center;
+                font-family: 'Comic Neue', cursive;
+                color: white;
+                font-size: larger;
+               font-weight: bolder;
+           }
+           button{
+               margin-top: 10px;
+               margin-left: 30px;
+               background-color: lightcoral;
+               border-radius: 10px;
+               padding: 10px;
+               font-family: 'Comic Neue', cursive;
+               font-weight: bolder;
+           }
+           button:hover{
+               background-color: aqua;
+               color: black;
+               
+
+           }
+           
+           a:hover{
+            color: black;
+           }
+           textarea{
+               margin-left: 50px;
+               font-family:'Comic Neue', cursive ;
+               font-size: larger;
+               border-radius: 5px;
+           }
+           input{
+               width: 60vw;
+               margin: 20px auto 20px auto;
+               height: 50px;
+               border-radius: 10px;
+               font-family:'Comic Neue', cursive ;
+               font-size: larger;
+           }
+           span{
+               display: inline-block;
+               padding: 10px;
+               border-radius: 5px;
+               text-align: center;
+               background-color: white;
+               color: black;
+               font-size: larger;
+               font-weight: bolder;
+           }
+           .ansd{
+            display: inline-block;
+               padding: 10px;
+               border-radius: 5px;
+               text-align: center;
+               background-color: lightgreen;
+               color: black;
+               font-size: larger;
+               font-weight: bolder;
+           }
+           #va{
+            display: inline-block;
+            width: 60vw;
+               padding: 10px;
+               border-radius: 5px;
+               margin: 50px auto 50px auto;
+               text-align: center;
+               background-color: lightgrey;
+               color: black;
+               font-size: larger;
+               font-weight: bolder; 
+           }
+           #va:hover{
+               background-color: aqua;
+           }
+           @media (max-width:630px){
+               #ques{
+                   width: 80vw;
+                   height: 40px;
+                  
+               }
+               ul{
+                   position: relative;
+                   left: -40px;
+               }
+               li{
+                  margin-right: 20px;
+               }
+               span,.ansd{
+                padding: 3px;
+    border-radius: 3px;
+    text-align: center;
+    
+    color: black;
+    font-size: smaller;
+               }
+               button{
+                border-radius: 1px;
+    padding: 2px;
+               }
+           }
+       </style>
+    </head>
+    <body>
+        <h3>Hello <%= Username %></h3>
+        <h1><%= subj %></h1>
+        <ul> 
+            <a href="/view/activity/<%=Username%>" style="display: block;" id="va">View your activity</a>
+            <div id="alerting" style="position: absolute;display: none;"><p>Your question is added</p>
+            <a href="/doubt/ques/<%=subj%>">Please Go back</a></div>
+                
+            
+            <input type="text" name="question" id="ques" rows="6" cols="60" placeholder="Type your question here...."><button value="Ask question" id="<%=subj%>" style="display: inline-block;" onclick="ask(event)">Ask Your Question</button>
+        <% for(var i=(questions.length-1);i>=0;i--){ %>
+            <li><span>Question-<%= questions.length-i %>:</span> <%= questions[i] %><button id="bt<%=i%>" onclick="change(event)">Add an answer</button></li>
+            <button  style="display: none;" value="submit answer" onclick="submitAns(event)" id="addans<%=i%>"><a style="cursor: pointer;" id="sub<%=i%>" name="<%=qid[i]%>">Submit answer</a></button>
+            <!--<form action="/put/answer/<%=qid[i]%>" method="put" style="display: none;" class="ch" id="addans<%=i%>">-->
+                <!--<input type="submit" name="<%=qid[i]%>" style="display: none;" value="submit answer" onclick="submitAns(event)" id="addans<%=i%>"/>-->
+            <!--</form>-->
+            <textarea name="answer" style="display: none;" class="ch" id="pa<%=i%>" cols="50" rows="10" placeholder="Add your answer here"></textarea>
+            <% for(var j=(answers[i].length-1);j>=0;j--){ %>
+                <li><span class="ansd">Answer-<%= answers[i].length-j %>:</span> <%= answers[i][j] %></li>
+
+            <% } %>
+            
+
+        <% } %>
+        </ul>
+    </body>
+    <script>
+        var subject;
+        var question;
+        var intro=document.getElementById("alerting");
+        var ss=document.getElementById("as");
+        function ask(event){
+            subject=event.target.id;
+            question=document.getElementById("ques");
+            console.log(question.value);
+            fetch('/ask/ques',{
+                method:"post",
+                headers:{"content-type":"application/json"},
+                body:JSON.stringify({
+                    subject:`${subject}`,
+                    questions:`${question.value}`
+                })
+            })
+            location.replace("/answer.ejs");
+            intro.style.display="block";
+            intro.style.backgroundColor="white";
+            document.getElementsByTagName("body").style.backgroundColor="block";
+           // ss.href="/go/answer/page";
+
+
+        }
+        // id="<%=qid[i]%>"
+        var t;
+        var f;
+        var ii;
+        var o;
+        
+        function submitAns(event){
+             ii=event.target.name;
+            console.log(ii);
+                
+            
+           fetch(`/put/answer/${ii}`,{
+                 method:"PUT",
+                 headers:{"content-type":"application/json"},
+                 body:JSON.stringify({
+                     answer:`${f.value}`
+                 })
+             })
+            //location.replace="/answer.ejs";
+            o.href="/go/answer/page";
+             
+             
+         }
+        function change(e){
+            
+            let i=(e.target.id).slice(2);
+            
+             t=document.getElementById(`addans${i}`);
+             f=document.getElementById(`pa${i}`);
+             o=document.getElementById(`sub${i}`);
+             console.log(f.innerHTML);
+            console.log(t.name);
+            if(t.style.display=="none"){
+                t.style.display="block";
+                f.style.display="block";
+                e.target.innerHTML="Go back";
+                check=0;
+
+            }
+            else{
+                t.style.display="none";
+                f.style.display="none";
+                e.target.innerHTML="Add an answer";
+            }
+            
+            //var c=document.getElementsByClassName("ch");
+            //console.log(c);
+            //c[i].style.display="block";
+            //c[i+1].style.display="block";
+
+        }
+        
+    </script>
+</html>

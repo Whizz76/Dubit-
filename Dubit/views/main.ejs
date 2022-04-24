@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Cedarville+Cursive&family=Comic+Neue:wght@300&family=Grape+Nuts&family=Overlock:ital,wght@0,400;1,900&family=Secular+One&display=swap" rel="stylesheet">
+        
+        <title>Choose</title>
+        <style>
+        body{
+            background-image: url('../images/wallpaper.jpg');
+            background-size:cover;
+            background-color: black;
+            
+        }
+        select{
+            display: block;
+            height: 50px;
+            width: 50vw;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            font-size: 120%;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin-top: 10px;
+        }
+        a{
+            text-decoration: none;
+            display: flex;
+            margin: 30px auto 30px auto;
+            padding: 10px;
+            width: 40vw;
+            justify-content: center;
+            align-items: center;
+            font-size: 120%;
+            font-family: 'Comic Neue', cursive;
+            background-color: white;
+            color: black;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bolder;
+        }
+        a:hover{
+            background-color: lightcoral;
+            box-shadow: 0 5px 10px 0 lightcoral;
+            font-weight: bolder;
+        }
+        h2,h3{
+            text-align: center;
+            font-family: 'Comic Neue', cursive;
+            color: white;
+            margin-top: 50px;
+        }
+        @media (max-width:600px){
+            select{
+                width: 80vw;
+            }
+            a{
+                width: 60vw;
+            }
+        }
+    </style>
+    </head>
+    <body>
+        <h2>Hi <%= name %>, Please choose the following</h2>
+        <h3>Select your college</h3>
+        <select onchange="college(event)">
+            <option>Select college</option>
+            <option value="IIT-BHU">IIT BHU</option>
+        </select>
+        <h3>Select Branch</h3>
+        <select onchange="branch(event)">
+            <option>Select branch</option>
+            <option value="Chemical">Chemical</option>
+            <option value="Computer">Computer science</option>
+            <option value="Mehanical">Mechanical</option>
+            <option value="Electrical">Electrical</option>
+            <option value="Electronics">Electronics</option>
+        </select>
+        <h3>Select semester</h3>
+        <select onchange="semester(event)">
+        <option>Select semester</option>>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            
+        </select>
+        <a href="" id="nt">Next</a>
+    </body>
+    <script>
+        var col;
+        var br;
+        var sem;
+        var a=document.getElementById("nt");
+        a.style.display="none";
+        function college(event){
+            col=event.target.value;
+            if(col && br && sem && col!="Select college" && br!="Select branch" && sem!="Select semester"){
+            a.style.display="block";
+            a.href=`/choose/subject?college=${col}&branch=${br}&semester=${sem}`;
+        }
+        else{
+            a.style.display="none";
+        }
+        }
+        function branch(event){
+            br=event.target.value;
+            if(col && br && sem && col!="Select college" && br!="Select branch" && sem!="Select semester"){
+            a.style.display="block";
+            a.href=`/choose/subject?college=${col}&branch=${br}&semester=${sem}`;
+        }
+        else{
+            a.style.display="none";
+        }
+        }
+        function semester(event){
+            sem=event.target.value;
+            if(col && br && sem && col!="Select college" && br!="Select branch" && sem!="Select semester"){
+            a.style.display="block";
+            a.href=`/choose/subject?college=${col}&branch=${br}&semester=${sem}`;
+        }
+        else{
+            a.style.display="none";
+        }
+        }
+        
+    </script>
+</html>

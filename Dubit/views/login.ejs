@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Cedarville+Cursive&family=Comic+Neue:wght@300&family=Grape+Nuts&family=Overlock:ital,wght@0,400;1,900&family=Secular+One&display=swap" rel="stylesheet">
+        <title>Login</title>
+       <style>
+           body{
+               background-image: url('../images/wallpaper.jpg');
+               background-size:cover;
+               background-color: black;
+               
+           }
+           input{
+               display: block;
+               height: 50px;
+               width: 50vw;
+               margin-left: auto;
+               margin-right: auto;
+               border-radius: 5px;
+               font-size: 120%;
+               font-family: Arial, Helvetica, sans-serif;
+               text-align: center;
+               margin-top: 100px;
+           }
+           a{
+               text-decoration: none;
+               display: flex;
+               margin: 30px auto 30px auto;
+               padding: 10px;
+               width: 40vw;
+               justify-content: center;
+               align-items: center;
+               font-size: 120%;
+               font-family: 'Comic Neue', cursive;
+               background-color: white;
+               color: black;
+               cursor: pointer;
+               font-weight: bolder;
+           }
+           a:hover{
+               background-color: lightcoral;
+               box-shadow: 0 5px 10px 0 lightcoral;
+               font-weight: bolder;
+           }
+           h2{
+               text-align: center;
+               font-family: 'Comic Neue', cursive;
+               color: white;
+           }
+           @media (max-width:600px){
+               input{
+                   width: 80vw;
+               }
+               a{
+                   width: 60vw;
+               }
+           }
+       </style>
+        <!--<script src="js/check.js"></script>-->
+    </head>
+    <body>
+        <h2>Please enter Your Username</h2>
+        <input type="text" name="name" placeholder="Enter your Username...." id="lo" onchange="add(event)"/><br/>
+        <a href="" id="li">Submit</a>
+       <!--<button id="sub" onclick="check()">Submit</button>-->
+    </body>
+   <script>
+       var st;
+       var link=document.getElementById("li")
+     function add(event){
+         st=event.target.value;
+         link.href=`/login/${st}`;
+
+     }
+        /*var n;
+        function add(event){
+    n=event.target.value
+}
+console.log(n);
+let bt=document.querySelector("#submit");
+bt.addEventListener("click",_=>{
+    fetch(`/login/${n}`,{
+        method:"get",
+        headers:{"content-type":"application/json"}
+    })
+});*/
+    </script>
+</html>

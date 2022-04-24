@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abel&family=Cedarville+Cursive&family=Comic+Neue:wght@300&family=Grape+Nuts&family=Overlock:ital,wght@0,400;1,900&family=Secular+One&display=swap" rel="stylesheet">
+        
+        <title>Create Account</title>
+        <style>
+            body{
+                background-image: url('../images/wallpaper.jpg');
+                background-size:cover;
+                background-color: black;
+                
+            }
+            input{
+                display: block;
+                height: 50px;
+                width: 50vw;
+                margin-left: auto;
+                margin-right: auto;
+                border-radius: 5px;
+                font-size: 120%;
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+                margin-top: 100px;
+            }
+            #sb{
+                text-decoration: none;
+                display: flex;
+                margin: 30px auto 30px auto;
+                padding: 10px;
+                width: 40vw;
+                justify-content: center;
+                align-items: center;
+                font-size: 120%;
+                font-family: 'Comic Neue', cursive;
+                background-color: white;
+                color: black;
+                cursor: pointer;
+                font-weight: bolder;
+            }
+            #sb:hover{
+                background-color: lightcoral;
+                box-shadow: 0 5px 10px 0 lightcoral;
+                font-weight: bolder;
+            }
+            h2,p{
+                text-align: center;
+                font-family: 'Comic Neue', cursive;
+                color: white;
+            }
+           p{
+               font-size: larger;
+               font-weight: bolder;
+           }
+            @media (max-width:600px){
+                input{
+                    width: 80vw;
+                }
+                a{
+                    width: 60vw;
+                }
+            }
+            </style>
+    </head>
+    <body>
+        <h2>Enter a Username</h2>
+        <form action="/add" method="post">
+        <input type="text" name="name" placeholder="Enter a username" onchange="change(event)"/>
+        <p id="changed" style="height:10px;"></p>
+        <input type="submit" value="submit" id="sb" onclick="go()"/>
+        </form>
+        
+            <a href="/login.ejs" id="lp">Login page</a>
+
+       
+        
+    </body>
+    <script>
+        var ig;
+        var p=document.getElementById("changed");
+        var bt=document.getElementById("sb");
+        var a=document.getElementById("lp");
+        bt.style.display="none";
+        a.style.display="none";
+        function change(event){
+            ig=event.target.value;
+            fetch(`/check/${ig}`,{
+                method:"get",
+                headers:{"content-type":"application/json"}
+            }).then((res)=>res.json()).then((result)=>{
+                if(result){
+                    p.innerHTML="Already exists";
+                    p.style.color="lightcoral";
+                    bt.style.display="none";
+                }
+                else{
+                    p.innerHTML="Available";
+                    p.style.color="cyan";
+                    bt.style.display="block";
+
+                }
+            })
+
+
+        }
+        function go(){
+            bt.textContent="submitted";
+            bt.style.display="block";
+
+        }
+        
+
+    </script>
+</html>
